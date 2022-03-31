@@ -7,10 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import javax.validation.Valid;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +30,7 @@ public class ProductController {
 
   private final ProductService service;
 
-  //TODO add resource location header
+  // TODO add resource location header
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Create new product", method = "POST")
   @ApiResponses(

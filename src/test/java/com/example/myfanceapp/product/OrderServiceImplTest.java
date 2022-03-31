@@ -76,8 +76,7 @@ class OrderServiceImplTest {
     List<AsOrderItem> asOrderItems = List.of(new OrderItemForm(notExistingProductId, itemQuantity));
     AsOrder orderParam = new OrderForm(buyerEmail, asOrderItems);
 
-    Mockito.when(productRepository.findById(any(Integer.class)))
-        .thenReturn(Optional.ofNullable(null));
+    Mockito.when(productRepository.findById(any(Integer.class))).thenReturn(Optional.empty());
 
     String expectedExceptionMessage =
         String.format("Product with id:[%s] does not exist", notExistingProductId);

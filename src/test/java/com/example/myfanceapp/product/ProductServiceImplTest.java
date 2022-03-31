@@ -8,6 +8,7 @@ import com.example.myfanceapp.product.model.Product;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -120,6 +121,39 @@ class ProductServiceImplTest {
         assertThrows(
             ProductNotFoundException.class,
             () -> service.updateProduct(notExistingProductId, newProduct));
+
+    // then
+    Assertions.assertEquals(expectedExceptionMessage, exception.getMessage());
+  }
+
+  @Test
+  public void getProductShouldReturnsProductForProvidedId() {
+    // given
+    Integer productId = 1;
+    Product expectedProduct = new Product("product 1 name", BigDecimal.valueOf(1));
+    Mockito.when(repository.findById(productId)).thenReturn(Optional.of(expectedProduct));
+
+    // when
+    Product product = service.getProduct(productId);
+
+    // then
+    Assertions.assertEquals(expectedProduct, product);
+  }
+
+  @Test
+  public void
+      getProductShouldThrowProductNotFoundExceptionWhenProductNotExistForProvidedProductId() {
+    // given
+    Integer notExistingProductId = 1;
+    Mockito.when(repository.findById(notExistingProductId)).thenReturn(Optional.empty());
+
+    String expectedExceptionMessage =
+        String.format("Product with id:[%s] does not exist", notExistingProductId);
+
+    // when
+    Exception exception =
+        assertThrows(
+            ProductNotFoundException.class, () -> service.getProduct(notExistingProductId));
 
     // then
     Assertions.assertEquals(expectedExceptionMessage, exception.getMessage());

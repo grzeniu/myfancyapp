@@ -30,7 +30,7 @@ public class OrderController {
 
   private final OrderService service;
 
-  //TODO add resource location header
+  // TODO add resource location header
   @PostMapping
   @Operation(summary = "Place new order", method = "POST")
   @ApiResponses(
