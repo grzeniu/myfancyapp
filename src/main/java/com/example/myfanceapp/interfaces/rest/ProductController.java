@@ -31,6 +31,7 @@ public class ProductController {
 
   private final ProductService service;
 
+  //TODO add resource location header
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Create new product", method = "POST")
   @ApiResponses(

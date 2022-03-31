@@ -1,25 +1,48 @@
-# Getting Started
+# My fancy app
 
-### Reference Documentation
+## Table of Contents
++ [About](#about)
++ [Requirements](#requirements)
++ [Usage](#usage)
++ [TODO](#todo)
++ [Questions](#questions)
 
-For further reference, please consider the following sections:
+## About <a name = "about"></a>
+My fancy app
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.5/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.5/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.5/reference/htmlsingle/#boot-features-developing-web-applications)
+## Requirements <a name = "requirements"></a>
+- Java 11
+- Gradle
+- Docker
 
-### Guides
+## Usage <a name = "usage"></a>
 
-The following guides illustrate how to use some features concretely:
+1. Execute `start.sh` script
+2. Wait for Spring Boot to start
+3. Visit `http://localhost:8080/swagger-ui.html`
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+Alternative way:
+1. Run command `docker-compose -f docker-compose-postgres.yaml up`
+2. Run application using Intellij
+3. Visit `http://localhost:8080/swagger-ui.html`
 
-### Additional Links
+# TODO <a name = "todo"></a>
+- [ ] Add logging
+- [ ] Add the Liquibase
+- [ ] Use an in-memory database for testing
+- [ ] Fix price precision
+- [ ] Add different currencies
 
-These additional references should also help you:
+# Questions <a name = "questions"></a>
+1. Propose a protocol / method and justify your choice
+    - I would use OAuth2 and JWT token - safe and easy to use with Spring. 
+    - Network ACL for AWS application - it's controller traffic in and out of one or more subnets, according to the provided rules. It is a firewall ensuring network security. Read more here: https://www.netstar.co.uk/why-do-i-need-a-firewall-business
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
+2. How can you make the service redundant? What considerations should you do?
+   - Amazon EC2 Auto scale to handle more requests. It requires load balancer like AWS Elastic Load Balancing.
+   - AWS Cluster Autoscaler automatically adjusts the number of kubernetes nodes in cluster when pods fail or are rescheduled onto other nodes
+   - Kubernetes Horizontal Pod Autoscaler (HPA) - `The Horizontal Pod Autoscaler changes the shape of your Kubernetes workload by automatically increasing or decreasing the number of Pods in response to the workload's CPU or memory consumption, or in response to custom metrics reported from within Kubernetes or external metrics from sources outside of your cluster.` ~ https://cloud.google.com/kubernetes-engine/docs/concepts/horizontalpodautoscaler 
+   - Kubernetes Vertical Pod Autoscaling - https://cloud.google.com/kubernetes-engine/docs/concepts/verticalpodautoscaler
+   - Kubernetes work like load balancer
+   - Last time I heard about Circuit Breaker pattern (https://martinfowler.com/bliki/CircuitBreaker.html). It is used to detect failures and encapsulates the logic of preventing a failure from constantly recurring, during maintenance, temporary external system failure or unexpected system difficulties.
+   - A few tips from Netflix which I would consider - https://netflixtechblog.com/fault-tolerance-in-a-high-volume-distributed-system-91ab4faae74a
