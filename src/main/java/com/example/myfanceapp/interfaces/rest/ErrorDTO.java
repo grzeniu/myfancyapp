@@ -1,12 +1,11 @@
 package com.example.myfanceapp.interfaces.rest;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.validation.FieldError;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.FieldError;
 
 @Getter
 @RequiredArgsConstructor
